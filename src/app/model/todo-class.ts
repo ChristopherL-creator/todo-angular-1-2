@@ -7,18 +7,75 @@ export class TodoClass {
     private readonly _creationDate: number;  
     //  come const, ma di proprietà, la posso cambiare solo una volta in costruttore; 
     //  possono coesistere readonly/private/public per ogni proprietà
-    prority?: string; // con ? intendo che proprietà c'è e non c'è
+    priority: TodoPriority; // con ? intendo che proprietà c'è e non c'è
 
-    constructor(name: string, tags: string[] = [], creationDate: Date = new Date(), priority: string = 'low'){ 
+    constructor(name: string, tags: string[] = [], creationDate: Date = new Date(), priority: TodoPriority = TodoPriority.LOW){ 
         this.name = name; 
         // proprità name non esiste in todo class: in typescript propretà vanno dichiarte fuori da costuttore 
         this.tags = tags; 
         this._creationDate = creationDate.getTime(); 
-        this.prority = priority;
+        this.priority = priority;
     }
 
     get creationDate(): Date{ 
         return new Date(this._creationDate);
+    }  
+
+    get color(): string{ 
+        return getPriorityColor(this.priority); 
     } 
 
+    get description(): string{ 
+        return getPriorityString(this.priority); 
+    }
+
+} 
+
+// export enum TodoPriority{ 
+    // DONE = { order: -1, name: 'completato', color: 'grey'}, 
+    // LOW = { order: 0, name: 'bassa', color: 'green'}, 
+    // MEDIUM = { order: 1, name: 'media', color: 'yellow'}, 
+    // HIGH = { order: 2, name: 'alta', color: 'orange'}, 
+    // VERYHIGH = { order: 3, name: 'molto alta', color: 'red'} 
+//  enums non possono tollerae oggetti complessi
+// } 
+export enum TodoPriority{ 
+    DONE = -1,
+    LOW = 0,
+    MEDIUM = 1, 
+    HIGH = 2, 
+    VERYHIGH = 3 
+//  enums non possono tollerae oggetti complessi
+} 
+
+//  dobbiamo quindi creare switch per ottenere i vari parametri
+
+export function getPriorityColor(priority: TodoPriority): string{ 
+    switch (priority) {
+        case TodoPriority.DONE:
+            return 'grey'; 
+        case TodoPriority.LOW:
+            return 'green'; 
+        case TodoPriority.MEDIUM:
+            return 'yellow'; 
+        case TodoPriority.HIGH:
+            return 'orange'; 
+        default: 
+            return 'red';
+    } 
+}
+
+export function getPriorityString(priority: TodoPriority): string{ 
+    switch (priority) {
+        case TodoPriority.DONE:
+            return 'completato'; 
+        case TodoPriority.LOW:
+            return 'bassa'; 
+        case TodoPriority.MEDIUM:
+            return 'media'; 
+        case TodoPriority.HIGH:
+            return 'alta'; 
+        default: 
+            return 'molto alta';
+    }
 }
