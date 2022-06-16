@@ -11,7 +11,7 @@ import { TODOS, TODOS_I } from './model/todos-mock';
 export class AppComponent implements OnInit{
   // con implements, class può integrare interface OnInit
   title = 'todo-angular';
-  todosArray: TodoInterface[]; 
+  todosArray: TodoClass[]; 
 
   // id?: string;
   // name: string; 
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit{
   // creationDate: number; 
 
   constructor(){ 
-    this.todosArray = TODOS_I;
+    this.todosArray = TODOS;
   }
   
   get creationDate(): Date {
