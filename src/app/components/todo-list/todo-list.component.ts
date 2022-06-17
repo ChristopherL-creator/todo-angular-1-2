@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { TodoClass } from 'src/app/model/todo-class';
 
 
@@ -7,16 +7,39 @@ import { TodoClass } from 'src/app/model/todo-class';
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss']
 })
-export class TodoListComponent implements OnInit {
+export class TodoListComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @Input() todos: TodoClass[];
+  // @Input() todos: TodoClass[]; 
+
+  todosArray: TodoClass[] = []; 
+
+  @Input() set todos(value: TodoClass[]){ 
+    this.todosArray = value; 
+    this.orderByPriority();
+  } 
+  // creando set, ogni volta che arriva nuovo input, cambia da solo anche html
 
   constructor() { 
-    this.todos = [];
+    this.todosArray = [];
   }
 
   ngOnInit(): void { 
+    // console.log('OnInit', new Date().getTime()); 
   } 
+
+  ngAfterViewInit(): void {
+    // console.log('AfterViewInit', new Date().getTime());
+  }
+
+  ngOnDestroy(): void {
+
+  } 
+
+  manageTodoEmission(todo: TodoClass){
+    // mi arriva todo che era stato lanciato  
+    console.log('list-component', todo.name); 
+    this.orderByPriority();
+  }
 
   orderByName(){ 
     // this.todos.sort(function(a: TodoClass, b: TodoClass) { 
@@ -30,7 +53,7 @@ export class TodoListComponent implements OnInit {
     //   //   return 0; 
     //   a.name.localeCompare(b.name); 
     // }) 
-    this.todos.sort(TodoClass.compareByName); 
+    this.todosArray.sort(TodoClass.compareByName); 
     // posso usare localeCompare perché devo ordinare stringhe
   } 
 
@@ -45,7 +68,7 @@ export class TodoListComponent implements OnInit {
     //   } 
     //     return 0;
     // }) 
-    this.todos.sort(TodoClass.compareByDate); 
+    this.todosArray.sort(TodoClass.compareByDate); 
     //  converto le date in numeri interi;
   }
 
@@ -61,7 +84,7 @@ export class TodoListComponent implements OnInit {
   //       return 0;
   //   })
   // } 
-  this.todos.sort(TodoClass.compareByPriority); 
+  this.todosArray.sort(TodoClass.compareByPriority); 
   //  gli passo la static da todo-class
   }
 }

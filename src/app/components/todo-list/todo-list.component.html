@@ -3,6 +3,11 @@
     <button (click)="orderByName()">Order by Name</button> 
     <button (click)="orderByDate()">Order by Date</button> 
     <button (click)="orderByPriority()">Order by Priority</button>
-    <app-todo-list-element *ngFor="let todo of todos" [todo]="todo"></app-todo-list-element>
+    <app-todo-list-element 
+    *ngFor="let todo of todosArray" 
+    [todo]="todo" 
+    (onTodoCompleted)="manageTodoEmission($event)"> 
+     <!--associo funzione ad emissione, le passo input tramite ($event) -->
+    </app-todo-list-element> 
 </div>
 

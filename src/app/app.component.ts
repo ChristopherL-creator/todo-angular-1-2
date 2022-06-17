@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoClass, TodoPriority } from './model/todo-class';
 import { fromPriorityToColor, fromPrioritytoDescr, TodoInterface } from './model/todo-interface';
-import { TODOS, TODOS_I } from './model/todos-mock';
+import { TODOS, TODOS2, TODOS_I } from './model/todos-mock';
 
 @Component({
   selector: 'app-root',
@@ -38,6 +38,10 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     console.log(TODOS);
   } 
+
+  toLuxuryMode(){ 
+    this.todosArray = TODOS2;
+  }
 
   getCorrectDate(timestamp: number): Date{ 
     const milliseconds = timestamp * 1000;

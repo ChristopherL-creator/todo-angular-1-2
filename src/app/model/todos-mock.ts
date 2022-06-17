@@ -14,6 +14,20 @@ TODOS.push(todo2);
 TODOS.push(todo3); 
 TODOS.push(todo4); 
 
+export const TODOS2: TodoClass[] = [];
+//  rendo disponibilie array al resto del progetto
+
+const todo21 = new TodoClass('bere più birre', [], new Date(), TodoPriority.VERYHIGH);  
+const todo22 = new TodoClass('andare in vacanza'); 
+const todo23 = new TodoClass('ordinare pizza');  
+const todo24 = new TodoClass('riguardare classi js', [], new Date(), TodoPriority.HIGH); 
+
+TODOS2.push(todo21); 
+TODOS2.push(todo22); 
+TODOS2.push(todo23); 
+TODOS2.push(todo24); 
+
+
 export const TODOS_I: TodoInterface[] = [ 
     //  a differenza di classe, non serve mettere "new" davanti a nome, ne serve un costruttore
     {

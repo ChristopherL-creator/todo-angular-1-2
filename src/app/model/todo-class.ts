@@ -1,13 +1,14 @@
 export class TodoClass {  
 
-    public name: string; 
+    name: string; 
     //  public: tutto qulli che usano oggetto di tipo todo, posono acceder a variabile; default
-    private tags: string[]; 
+     tags: string[]; 
     //  private simula underscore in javascript, propeità non si può vedere al di fuori di classe
     private readonly _creationDate: number;  
     //  come const, ma di proprietà, la posso cambiare solo una volta in costruttore; 
     //  possono coesistere readonly/private/public per ogni proprietà
-    priority: TodoPriority; // con ? intendo che proprietà c'è e non c'è
+    priority: TodoPriority; // con ? intendo che proprietà c'è e non c'èv
+    private _doneDate?: number;
 
     constructor(name: string, tags: string[] = [], creationDate: Date = new Date(), priority: TodoPriority = TodoPriority.LOW){ 
         this.name = name; 
@@ -19,7 +20,15 @@ export class TodoClass {
 
     get creationDate(): Date{ 
         return new Date(this._creationDate);
-    }  
+    } 
+
+    get doneDate(): Date | null { 
+        if (this._doneDate) {
+            return new Date(this._doneDate);
+        } else { 
+            return null;
+        }
+    }
 
     get color(): string{ 
         return getPriorityColor(this.priority); 
@@ -28,6 +37,12 @@ export class TodoClass {
     get description(): string{ 
         return getPriorityString(this.priority); 
     } 
+
+    done(): void{ 
+        const now = new Date(); 
+        this.priority = TodoPriority.DONE;
+        this._doneDate = now.getTime();
+    }
 
     static compareByName(a: TodoClass, b: TodoClass){ 
         return a.name.localeCompare(b.name);

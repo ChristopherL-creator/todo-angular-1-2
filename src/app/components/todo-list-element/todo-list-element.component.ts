@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TodoClass } from 'src/app/model/todo-class';
+
 
 @Component({
   selector: 'app-todo-list-element',
@@ -8,10 +9,19 @@ import { TodoClass } from 'src/app/model/todo-class';
 })
 export class TodoListElementComponent implements OnInit {
 
-  @Input() todo?: TodoClass; 
+  @Input() todo?: TodoClass;  
+  @Output() onTodoCompleted = new EventEmitter<TodoClass>();  
+  // emetto oggetto di tipo todo
+
   constructor() { }
 
   ngOnInit(): void {
+  } 
+
+  todoCompleted(){  
+    // dico al todo che è stao completato
+    this.todo?.done();
+    this.onTodoCompleted.emit(this.todo);
   }
 
 }
