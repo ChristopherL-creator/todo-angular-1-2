@@ -11,7 +11,6 @@ export interface TodoInterface {
 } 
 //  interfaccia è via di mezzo tra oggetto generico e classe, non mi permette di definire funzioni con codice dentro; 
 //  si usa al posto delle classi molto spesso; 
-//  
 
 export function fromPriorityToColor(priority: TodoPriority): string{ 
     switch (priority) {

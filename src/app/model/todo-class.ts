@@ -27,8 +27,20 @@ export class TodoClass {
 
     get description(): string{ 
         return getPriorityString(this.priority); 
-    }
+    } 
 
+    static compareByName(a: TodoClass, b: TodoClass){ 
+        return a.name.localeCompare(b.name);
+    } 
+    //  siccome è statica, la posso passare in tutti i files in cui serve (todo-list-component.ts)
+
+    static compareByDate(a: TodoClass, b: TodoClass){ 
+        return a._creationDate - b._creationDate;
+    } 
+
+    static compareByPriority(a: TodoClass, b: TodoClass){ 
+        return b.priority - a.priority;
+    } 
 } 
 
 // export enum TodoPriority{ 
