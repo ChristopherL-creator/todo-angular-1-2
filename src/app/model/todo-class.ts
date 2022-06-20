@@ -1,108 +1,109 @@
-export class TodoClass {  
+export class TodoClass {
 
-    name: string; 
+    name: string;
     //  public: tutto qulli che usano oggetto di tipo todo, posono acceder a variabile; default
-     tags: string[]; 
+     tags: string[];
     //  private simula underscore in javascript, propeità non si può vedere al di fuori di classe
-    private readonly _creationDate: number;  
-    //  come const, ma di proprietà, la posso cambiare solo una volta in costruttore; 
+    private readonly _creationDate: number;
+    //  come const, ma di proprietà, la posso cambiare solo una volta in costruttore;
     //  possono coesistere readonly/private/public per ogni proprietà
     priority: TodoPriority; // con ? intendo che proprietà c'è e non c'èv
     private _doneDate?: number;
 
-    constructor(name: string, tags: string[] = [], creationDate: Date = new Date(), priority: TodoPriority = TodoPriority.LOW){ 
-        this.name = name; 
-        // proprità name non esiste in todo class: in typescript propretà vanno dichiarte fuori da costuttore 
-        this.tags = tags; 
-        this._creationDate = creationDate.getTime(); 
+    constructor(name: string, tags: string[] = [], creationDate: Date = new Date(), priority: TodoPriority = TodoPriority.LOW){
+        this.name = name;
+        // proprità name non esiste in todo class: in typescript propretà vanno dichiarte fuori da costuttore
+        this.tags = tags;
+        this._creationDate = creationDate.getTime();
         this.priority = priority;
     }
 
-    get creationDate(): Date{ 
+    get creationDate(): Date{
         return new Date(this._creationDate);
-    } 
+    }
 
-    get doneDate(): Date | null { 
+    get doneDate(): Date | null {
         if (this._doneDate) {
             return new Date(this._doneDate);
-        } else { 
+        } else {
             return null;
         }
     }
 
-    get color(): string{ 
-        return getPriorityColor(this.priority); 
-    } 
+    get color(): string{
+        return getPriorityColor(this.priority);
+    }
 
-    get description(): string{ 
-        return getPriorityString(this.priority); 
-    } 
+    get description(): string{
+        return getPriorityString(this.priority);
+    }
 
-    done(): void{ 
-        const now = new Date(); 
+    done(): void{
+        const now = new Date();
         this.priority = TodoPriority.DONE;
         this._doneDate = now.getTime();
     }
 
-    static compareByName(a: TodoClass, b: TodoClass){ 
+    static compareByName(a: TodoClass, b: TodoClass){
         return a.name.localeCompare(b.name);
-    } 
+    }
+    //  uso localeCompare perché sono stringhe;
     //  siccome è statica, la posso passare in tutti i files in cui serve (todo-list-component.ts)
 
-    static compareByDate(a: TodoClass, b: TodoClass){ 
+    static compareByDate(a: TodoClass, b: TodoClass){
         return a._creationDate - b._creationDate;
-    } 
+    }
 
-    static compareByPriority(a: TodoClass, b: TodoClass){ 
+    static compareByPriority(a: TodoClass, b: TodoClass){
         return b.priority - a.priority;
-    } 
-} 
+    }
+}
 
-// export enum TodoPriority{ 
-    // DONE = { order: -1, name: 'completato', color: 'grey'}, 
-    // LOW = { order: 0, name: 'bassa', color: 'green'}, 
-    // MEDIUM = { order: 1, name: 'media', color: 'yellow'}, 
-    // HIGH = { order: 2, name: 'alta', color: 'orange'}, 
-    // VERYHIGH = { order: 3, name: 'molto alta', color: 'red'} 
+// export enum TodoPriority{
+    // DONE = { order: -1, name: 'completato', color: 'grey'},
+    // LOW = { order: 0, name: 'bassa', color: 'green'},
+    // MEDIUM = { order: 1, name: 'media', color: 'yellow'},
+    // HIGH = { order: 2, name: 'alta', color: 'orange'},
+    // VERYHIGH = { order: 3, name: 'molto alta', color: 'red'}
 //  enums non possono tollerae oggetti complessi
-// } 
-export enum TodoPriority{ 
+// }
+export enum TodoPriority{
     DONE = -1,
     LOW = 0,
-    MEDIUM = 1, 
-    HIGH = 2, 
-    VERYHIGH = 3 
+    MEDIUM = 1,
+    HIGH = 2,
+    VERYHIGH = 3
 //  enums non possono tollerae oggetti complessi
-} 
+}
 
 //  dobbiamo quindi creare switch per ottenere i vari parametri
 
-export function getPriorityColor(priority: TodoPriority): string{ 
+export function getPriorityColor(priority: TodoPriority): string{
     switch (priority) {
         case TodoPriority.DONE:
-            return 'grey'; 
+            return 'grey';
         case TodoPriority.LOW:
-            return 'green'; 
+            return 'green';
         case TodoPriority.MEDIUM:
-            return 'yellow'; 
+            return 'yellow';
         case TodoPriority.HIGH:
-            return 'orange'; 
-        default: 
+            return 'orange';
+        default:
             return 'red';
-    } 
+    }
 }
 
-export function getPriorityString(priority: TodoPriority): string{ 
+export function getPriorityString(priority: TodoPriority): string{
     switch (priority) {
         case TodoPriority.DONE:
-            return 'completato'; 
+            return 'completato';
         case TodoPriority.LOW:
-            return 'bassa'; 
+            return 'bassa';
         case TodoPriority.MEDIUM:
-            return 'media'; 
+            return 'media';
         case TodoPriority.HIGH:
-            return 'alta'; 
-        default: 
+            return 'alta';
+        default:
             return 'molto alta';
     }
 }

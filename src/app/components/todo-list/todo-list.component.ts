@@ -9,23 +9,23 @@ import { TodoClass } from 'src/app/model/todo-class';
 })
 export class TodoListComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  // @Input() todos: TodoClass[]; 
+  // @Input() todos: TodoClass[];
 
-  todosArray: TodoClass[] = []; 
+  todosArray: TodoClass[] = [];
 
-  @Input() set todos(value: TodoClass[]){ 
-    this.todosArray = value; 
+  @Input() set todos(value: TodoClass[]){
+    this.todosArray = value;
     this.orderByPriority();
-  } 
+  }
   // creando set, ogni volta che arriva nuovo input, cambia da solo anche html
 
-  constructor() { 
+  constructor() {
     this.todosArray = [];
   }
 
-  ngOnInit(): void { 
-    // console.log('OnInit', new Date().getTime()); 
-  } 
+  ngOnInit(): void {
+    // console.log('OnInit', new Date().getTime());
+  }
 
   ngAfterViewInit(): void {
     // console.log('AfterViewInit', new Date().getTime());
@@ -33,58 +33,58 @@ export class TodoListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
 
-  } 
+  }
 
   manageTodoEmission(todo: TodoClass){
-    // mi arriva todo che era stato lanciato  
-    console.log('list-component', todo.name); 
+    // mi arriva todo che era stato lanciato
+    console.log('list-component', todo.name);
     this.orderByPriority();
   }
 
-  orderByName(){ 
-    // this.todos.sort(function(a: TodoClass, b: TodoClass) { 
+  orderByName(){
+    // this.todos.sort(function(a: TodoClass, b: TodoClass) {
     //   // if (a.name < b.name) {
     //   //   return -1;
-    //   // } 
+    //   // }
 
     //   // if (a.name > b.name) {
     //   //   return 1;
-    //   // } 
-    //   //   return 0; 
-    //   a.name.localeCompare(b.name); 
-    // }) 
-    this.todosArray.sort(TodoClass.compareByName); 
-    // posso usare localeCompare perché devo ordinare stringhe
-  } 
+    //   // }
+    //   //   return 0;
+    //   a.name.localeCompare(b.name);
+    // })
+    this.todosArray.sort(TodoClass.compareByName);
+ // richiamo funzione statica "compareBy..." da todo-class.ts
+  }
 
-  orderByDate(){ 
-    // this.todos.sort(function(a: TodoClass, b: TodoClass) { 
+  orderByDate(){
+    // this.todos.sort(function(a: TodoClass, b: TodoClass) {
     //   if (a.creationDate < b.creationDate) {
     //     return -1;
-    //   } 
+    //   }
 
     //   if (a.creationDate > b.creationDate) {
     //     return 1;
-    //   } 
+    //   }
     //     return 0;
-    // }) 
-    this.todosArray.sort(TodoClass.compareByDate); 
+    // })
+    this.todosArray.sort(TodoClass.compareByDate);
     //  converto le date in numeri interi;
   }
 
-  orderByPriority(){ 
-  //   this.todos.sort(function(a: TodoClass, b: TodoClass) { 
+  orderByPriority(){
+  //   this.todos.sort(function(a: TodoClass, b: TodoClass) {
   //     if (a.priority < b.priority) {
   //       return -1;
-  //     } 
+  //     }
 
   //     if (a.priority > b.priority) {
   //       return 1;
-  //     } 
+  //     }
   //       return 0;
   //   })
-  // } 
-  this.todosArray.sort(TodoClass.compareByPriority); 
+  // }
+  this.todosArray.sort(TodoClass.compareByPriority);
   //  gli passo la static da todo-class
   }
 }
