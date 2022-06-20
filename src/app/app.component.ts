@@ -12,7 +12,7 @@ import { TODOS, TODOS2, TODOS_I } from './model/todos-mock';
 export class AppComponent implements OnInit{
   // con implements, class può integrare interface OnInit
   title = 'todo-angular';
-  todosArray: TodoClass[]; 
+  // todosArray: TodoClass[]; 
 
   // id?: string;
   // name: string; 
@@ -21,7 +21,7 @@ export class AppComponent implements OnInit{
   // creationDate: number; 
 
   constructor(){ 
-    this.todosArray = TODOS;
+    // this.todosArray = TODOS;
   }
   
   get creationDate(): Date {
@@ -40,10 +40,10 @@ export class AppComponent implements OnInit{
     console.log(TODOS);
   } 
 
-  toLuxuryMode(){ 
-    this.todosArray = TODOS2; 
+  // toLuxuryMode(){ 
+  //   this.todosArray = TODOS2; 
     
-  }
+  // }
 
   getCorrectDate(timestamp: number): Date{ 
     const milliseconds = timestamp * 1000;

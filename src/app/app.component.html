@@ -8,6 +8,10 @@
  <span>{{getColor(todo.priority)}}</span>  -->
 <!-- </div>  --> 
 <h1>{{title}}</h1>
-<button (click)="toLuxuryMode()">passa a modailtà lusso</button>
-<app-todo-list [todos]="todosArray"></app-todo-list>
+<!-- <button (click)="toLuxuryMode()">passa a modailtà lusso</button> -->
+<app-todo-list></app-todo-list> 
+
+<h2>ToDo Completati</h2>
+<app-done-list></app-done-list> 
+<!-- importo app done list, all'inizio vedrò due liste uguali -->
 <!-- <router-outlet></router-outlet> -->

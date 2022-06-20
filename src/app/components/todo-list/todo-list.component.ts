@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { TodoClass } from 'src/app/model/todo-class';
+import { DataService } from 'src/app/services/data.service';
 
 
 @Component({
@@ -13,14 +14,19 @@ export class TodoListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   todosArray: TodoClass[] = [];
 
-  @Input() set todos(value: TodoClass[]){
-    this.todosArray = value;
-    this.orderByPriority();
-  }
+  // @Input() set todos(value: TodoClass[]){
+  //   this.todosArray = value;
+  //   this.orderByPriority();
+  // }
   // creando set, ogni volta che arriva nuovo input, cambia da solo anche html
 
-  constructor() {
-    this.todosArray = [];
+  constructor(private dataServ: DataService) {
+    this.todosArray = dataServ.getActiveTodos(); 
+    //  todos ora arrivano da dataserv;
+  } 
+
+  refreshArray(){ 
+    this.todosArray = this.dataServ.getActiveTodos(); 
   }
 
   ngOnInit(): void {
@@ -37,7 +43,8 @@ export class TodoListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   manageTodoEmission(todo: TodoClass){
     // mi arriva todo che era stato lanciato
-    console.log('list-component', todo.name);
+    console.log('list-component', todo.name); 
+    this.refreshArray();
     this.orderByPriority();
   }
 
