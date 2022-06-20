@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { TodoClass, TodoPriority } from './model/todo-class';
 import { fromPriorityToColor, fromPrioritytoDescr, TodoInterface } from './model/todo-interface';
 import { TODOS, TODOS2, TODOS_I } from './model/todos-mock';
@@ -40,7 +41,8 @@ export class AppComponent implements OnInit{
   } 
 
   toLuxuryMode(){ 
-    this.todosArray = TODOS2;
+    this.todosArray = TODOS2; 
+    
   }
 
   getCorrectDate(timestamp: number): Date{ 
