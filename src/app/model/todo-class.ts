@@ -56,6 +56,15 @@ export class TodoClass {
 
     static compareByPriority(a: TodoClass, b: TodoClass){
         return b.priority - a.priority;
+    } 
+
+    static fromDbObj(dbObject: any){ 
+        const todo = new TodoClass(dbObject.name, dbObject.tags, new Date(dbObject.creationDate * 1000), dbObject.priority); 
+        //  creationDate è di tipo Date, quindi dobbiamo cotruirla con new Date();
+        if (dbObject.doneDate) {
+            todo._doneDate = dbObject.doneDate * 1000;
+        } 
+        return todo;
     }
 }
 
