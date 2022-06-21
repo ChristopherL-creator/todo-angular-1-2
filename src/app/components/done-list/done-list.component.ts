@@ -12,7 +12,11 @@ export class DoneListComponent implements OnInit {
   todosArray: TodoClass[] = [];
 
   constructor(private dataServ: DataService) {
-    this.todosArray = dataServ.getDoneTodos(); 
+    dataServ.getDoneTodos().subscribe({ 
+      next: todos => this.todosArray = todos, 
+      error: err => console.log(err)
+      
+    }); 
 //  todos ora arrivano da dataserv;
   }
 
@@ -21,13 +25,15 @@ export class DoneListComponent implements OnInit {
   } 
 
   refreshArray(){ 
-    this.todosArray = this.dataServ.getDoneTodos(); 
+    // this.todosArray = this.dataServ.getDoneTodos(); 
   }
 
-  manageTodoEmission(todo: TodoClass){
+  manageTodoDelete(todo: TodoClass){
     // mi arriva todo che era stato lanciato
     console.log('list-component', todo.name);
-    this.orderByPriority();
+//  dobbiamo avvisrre behavior subj che è cambiato  
+  this.dataServ.removeTodo(todo);
+    
   }
 
   orderByName(){
