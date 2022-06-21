@@ -1,7 +1,7 @@
-<div *ngIf="todo" [style.background-color]="todo.color" class="todo-card"> 
-    <span>{{todo.name}}</span> 
+<div *ngIf="todo" [style.background-color]="todo.color" class="todo-card">
+    <span>{{todo.name}}</span>
     <span>{{todo.creationDate}}</span>
-    <span>{{todo.priority}}</span> 
-    <span>{{todo.description}}</span> 
+    <span>{{todo.priority}}</span>
+    <span>{{todo.description}}</span>
     <button (click)="todoCompleted()">Completato</button>
 </div>

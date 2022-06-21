@@ -9,16 +9,16 @@ import { TodoClass } from 'src/app/model/todo-class';
 })
 export class TodoListElementComponent implements OnInit {
 
-  @Input() todo?: TodoClass;  
-  @Output() onTodoCompleted = new EventEmitter<TodoClass>();  
+  @Input() todo?: TodoClass;
+  @Output() onTodoCompleted = new EventEmitter<TodoClass>();
   // emetto oggetto di tipo todo
 
   constructor() { }
 
   ngOnInit(): void {
-  } 
+  }
 
-  todoCompleted(){  
+  todoCompleted(){
     // dico al todo che è stao completato
     this.todo?.done();
     this.onTodoCompleted.emit(this.todo);
