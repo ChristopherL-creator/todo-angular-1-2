@@ -21,9 +21,9 @@ export class DataService {
     // .catch(err => console.log(err)) 
     // commento fetch 
     this.apiServ.getTodosFromDb().subscribe({ 
-      //  ora bhaviour subject, tramite next, avrà valore da db, che sara result:
+      //  ora bhaviour subject, tramite next, avrà valore da db, che sara result: 
       next: result => this.todos.next(result), 
-      //  se va bene
+      //  se va bene; result conterrà tutti i todos
       error: err => console.log(err)
       //  se va male
     });
@@ -42,7 +42,8 @@ export class DataService {
   getActiveTodos(): Observable<TodoClass[]>{ 
 //  uso di uovo pipe per elaborare(filter) dato prima di resituirlo
     return this.todos.pipe( 
-      map(array => array.filter(todo => todo.doneDate === null))
+      map(array => array.filter(todo => todo.doneDate === null)) 
+      // tengo solo todos con doneDate === null(non hanno doneDate)
     );
     // const tempTodos = []; 
     // for (const todo of this.todos) {
@@ -55,8 +56,10 @@ export class DataService {
 
   getDoneTodos(): Observable<TodoClass[]>{ 
     // return this.todos.filter(todo => todo.doneDate === null); 
+    //  ogni volta che richiamo todos, subisce filtraggio:
     return this.todos.pipe( 
-      map(array => array.filter(todo => todo.doneDate !== null))
+      map(array => array.filter(todo => todo.doneDate !== null)) 
+      //  resituisco tutti uelli che hanno doneDate
     );
   } 
 
@@ -64,12 +67,15 @@ export class DataService {
     //  creo nuovo array, da quello vecchio, e flielo do in pasto come nuovo vlore, per avvisre subject che è cambiato
     const newArray = [...this.todos.value]; 
     // in subject significa prendere ultimo valore dato 
-    this.todos.next(newArray);
+    this.todos.next(newArray); 
+    // next forza cambiamento subject
   } 
 
   removeTodo(todo: TodoClass): void{  
     //  uso value per prendere array todos con valori più recenti
     const newArray = this.todos.value.filter(t => t !== todo);
-    this.todos.next(newArray);
+    this.todos.next(newArray); 
+        // next forza cambiamento subject
+
   }
 }

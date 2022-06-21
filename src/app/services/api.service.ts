@@ -26,12 +26,13 @@ export class ApiService {
     const todoArray = []; 
     for (const dbObject of dbObjectArray) {
       const newTodo = TodoClass.fromDbObj(dbObject); 
+      //  array di oggetti generici diventa array di todoclass
       todoArray.push(newTodo);
     } 
     return todoArray;
   }
 
   fetchData(){
-    return fetch('https://628b2f687886bbbb37b2139d.mockapi.io/todos') 
+    // return fetch('https://628b2f687886bbbb37b2139d.mockapi.io/todos') 
   }
 }

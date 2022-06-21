@@ -12,7 +12,9 @@ export class DoneListComponent implements OnInit {
   todosArray: TodoClass[] = [];
 
   constructor(private dataServ: DataService) {
-    dataServ.getDoneTodos().subscribe({ 
+    
+      dataServ.getDoneTodos().subscribe({ 
+//  ogni volta che richiamo todos, subisce filtraggio:
       next: todos => this.todosArray = todos, 
       error: err => console.log(err)
       

@@ -21,8 +21,9 @@ export class TodoListComponent implements OnInit, AfterViewInit, OnDestroy {
   // }
   // creando set, ogni volta che arriva nuovo input, cambia da solo anche html
 
-  constructor(private dataServ: DataService, /*private apiServ: ApiService*/) {
+  constructor(private dataServ: DataService, private apiServ: ApiService) {
     dataServ.getActiveTodos().subscribe({ 
+      // todos che mi arrivano sono filtrati da getactive.. 
       next: todos => this.todosArray = todos, 
       error: err => console.log(err)
     }); 
