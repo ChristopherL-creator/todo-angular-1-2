@@ -11,9 +11,10 @@ export class ApiService {
   constructor(private http: HttpClient) { 
     //  importo httpclient; 
   }  
-
+//  chimata server, possiamo fare pipe, che ci permete di infilre elaborazioni del dato generico in arrivo da mock api, 
+//  da dbobjects, a todoclass
   getTodosFromDb(){ 
-    const url = 'https://628b2f12667aea3a3e290de6.mockapi.io/todos'; 
+    const url = 'https://628b2f687886bbbb37b2139d.mockapi.io/todos'; 
     return this.http.get<TodoClass[]>(url).pipe( 
       // stabilisco che il tipo sia comunque TodoClass
       map(dbObjects => this.convertToTodosClass(dbObjects))
@@ -25,12 +26,13 @@ export class ApiService {
     const todoArray = []; 
     for (const dbObject of dbObjectArray) {
       const newTodo = TodoClass.fromDbObj(dbObject); 
+      //  array di oggetti generici diventa array di todoclass
       todoArray.push(newTodo);
     } 
     return todoArray;
   }
 
   fetchData(){
-    return fetch('https://628b2f12667aea3a3e290de6.mockapi.io/todos') 
+    // return fetch('https://628b2f687886bbbb37b2139d.mockapi.io/todos') 
   }
 }

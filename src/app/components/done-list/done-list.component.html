@@ -7,7 +7,7 @@
     <app-todo-list-element 
     *ngFor="let todo of todosArray" 
     [todo]="todo" 
-    (onTodoCompleted)="manageTodoEmission($event)"> 
+    (onTodoDeleted)="manageTodoDelete($event)"> 
      <!--associo funzione ad emissione, le passo input tramite ($event) -->
     </app-todo-list-element> 
 </div> 

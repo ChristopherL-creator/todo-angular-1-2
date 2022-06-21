@@ -9,8 +9,12 @@ import { TodoClass } from 'src/app/model/todo-class';
 })
 export class TodoListElementComponent implements OnInit {
 
+
   @Input() todo?: TodoClass;
   @Output() onTodoCompleted = new EventEmitter<TodoClass>();
+  @Output() onTodoDeleted = new EventEmitter<TodoClass>();
+
+
   // emetto oggetto di tipo todo
 
   constructor() { }
@@ -22,6 +26,10 @@ export class TodoListElementComponent implements OnInit {
     // dico al todo che è stao completato
     this.todo?.done();
     this.onTodoCompleted.emit(this.todo);
+  }
+
+  todoDeleted(): void{
+    this.onTodoDeleted.emit(this.todo);
   }
 
 }
