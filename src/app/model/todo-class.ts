@@ -1,6 +1,6 @@
 export class TodoClass {
 
-    id?: string
+    id?: string;
     name: string;
     //  public: tutto qulli che usano oggetto di tipo todo, posono acceder a variabile; default
      tags: string[];
@@ -57,15 +57,15 @@ export class TodoClass {
 
     static compareByPriority(a: TodoClass, b: TodoClass){
         return b.priority - a.priority;
-    } 
+    }
 
-    static fromDbObj(dbObject: any){ 
-        const todo = new TodoClass(dbObject.name, dbObject.tags, new Date(dbObject.creationDate * 1000), dbObject.priority); 
+    static fromDbObj(dbObject: any){
+        const todo = new TodoClass(dbObject.name, dbObject.tags, new Date(dbObject.creationDate * 1000), dbObject.priority);
         todo.id = dbObject.id;
         //  creationDate è di tipo Date, quindi dobbiamo cotruirla con new Date();
         if (dbObject.doneDate) {
             todo._doneDate = dbObject.doneDate * 1000;
-        } 
+        }
         return todo;
     }
 }

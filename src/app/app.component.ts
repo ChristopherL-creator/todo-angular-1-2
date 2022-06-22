@@ -12,52 +12,52 @@ import { TODOS, TODOS2, TODOS_I } from './model/todos-mock';
 export class AppComponent implements OnInit{
   // con implements, class può integrare interface OnInit
   title = 'todo-angular';
-  // todosArray: TodoClass[]; 
+  // todosArray: TodoClass[];
 
   // id?: string;
-  // name: string; 
-  // tags: string[]; 
-  // priority: TodoPriority; 
-  // creationDate: number; 
+  // name: string;
+  // tags: string[];
+  // priority: TodoPriority;
+  // creationDate: number;
 
-  constructor(){ 
+  constructor(){
     // this.todosArray = TODOS;
   }
-  
+
   get creationDate(): Date {
     throw new Error('Method not implemented.');
   }
-  
+
   get color(): string {
     throw new Error('Method not implemented.');
   }
-  
+
   get description(): string {
     throw new Error('Method not implemented.');
   }
 
   ngOnInit(): void {
     console.log(TODOS);
-  } 
+  }
 
-  // toLuxuryMode(){ 
-  //   this.todosArray = TODOS2; 
-    
+  // toLuxuryMode(){
+  //   this.todosArray = TODOS2;
+
   // }
 
-  getCorrectDate(timestamp: number): Date{ 
+  getCorrectDate(timestamp: number): Date{
     const milliseconds = timestamp * 1000;
     return new Date(milliseconds);
-  } 
+  }
 
-  getDescritpion(priority: TodoPriority){ 
-    return fromPrioritytoDescr(priority); 
+  getDescritpion(priority: TodoPriority){
+    return fromPrioritytoDescr(priority);
       //  ho spaostato codice da classe, a ovunque mi serva
 
-  } 
+  }
 
-  getColor(priority: TodoPriority){ 
+  getColor(priority: TodoPriority){
     return fromPriorityToColor(priority);
   //  ho spaostato codice da classe, a ovunque mi serva
   }
-} 
+}
