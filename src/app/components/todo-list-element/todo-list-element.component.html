@@ -1,5 +1,6 @@
 <div *ngIf="todo" [style.background-color]="todo.color" class="todo-card">
-    <span>{{todo.name}}</span>
+    <span>{{todo.name}}</span> 
+    <a routerLink="/todo/{{todo.id}}">Dettagli</a>
     <span>{{todo.creationDate}}</span>
     <span>{{todo.priority}}</span>
     <span>{{todo.description}}</span>

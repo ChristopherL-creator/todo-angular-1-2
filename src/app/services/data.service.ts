@@ -77,5 +77,13 @@ export class DataService {
     this.todos.next(newArray); 
         // next forza cambiamento subject
 
+  } 
+
+  getTodoById(id: string): Observable<TodoClass | undefined>{ 
+    //  risutlato potrebbe essere todoclass o undefinde
+    return this.todos.pipe( 
+      map(array => array.find(t => t.id === id)) 
+      //  resituisco tutti uelli che hanno doneDate
+    );
   }
 }

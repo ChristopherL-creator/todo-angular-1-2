@@ -6,12 +6,20 @@
   <span>{{todo.priority}}</span> 
   <span>{{getDescritpion(todo.priority)}}</span> 
  <span>{{getColor(todo.priority)}}</span>  -->
-<!-- </div>  --> 
-<h1>{{title}}</h1>
+<!-- </div>  -->  
+<header class="header"> 
+  <h1>{{title}}</h1> 
+  <nav> 
+    <a routerLink="/active">Active Todos</a> 
+<!--  active da app-routing-module -->
+    <a routerLink="/done">Done Todos</a> 
+<!--  done da app-routing-module -->
+  </nav>
+</header>
 <!-- <button (click)="toLuxuryMode()">passa a modailtà lusso</button> -->
-<app-todo-list></app-todo-list> 
+<!-- <app-todo-list></app-todo-list> 
 
-<h2>ToDo Completati</h2>
-<app-done-list></app-done-list> 
+<app-done-list></app-done-list>  -->
 <!-- importo app done list, all'inizio vedrò due liste uguali -->
-<!-- <router-outlet></router-outlet> -->
+<router-outlet></router-outlet> 
+<!-- placegoler sovrascritto da router module con compoennte -->
