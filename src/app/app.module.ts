@@ -10,6 +10,7 @@ import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { DoneListComponent } from './components/done-list/done-list.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { TodoDetailComponent } from './components/todo-detail/todo-detail.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,8 +24,9 @@ import { TodoDetailComponent } from './components/todo-detail/todo-detail.compon
   imports: [
     BrowserModule,
     AppRoutingModule, 
-    HttpClientModule 
+    HttpClientModule, 
 // non è default javasctip, la devo importare manualmente
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

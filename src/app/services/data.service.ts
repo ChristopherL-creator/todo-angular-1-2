@@ -1,6 +1,8 @@
+import { newArray } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, pipe } from 'rxjs';
 import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
+import { TodoListComponent } from '../components/todo-list/todo-list.component';
 import { TodoClass } from '../model/todo-class';
 import { TODOS } from '../model/todos-mock';
 import { ApiService } from './api.service';
@@ -81,6 +83,22 @@ export class DataService {
         // next forza cambiamento subject 
     return this.apiServ.deleteTodo(todo.id!); 
   } 
+
+  saveTodo(todo: TodoClass){ 
+    if (todo.id) {
+      return this.apiServ.putTodo(todo)
+    } else { 
+      return this.apiServ.postTodo(todo).pipe( 
+        map(todo => { 
+          const newArray = [...this.todos.value]; 
+          newArray.push(todo)
+          this.todos.next(newArray); 
+          // aggiungo nuovo todo a vecchio array 
+          return todo; 
+        })
+      ); 
+    }
+  }
 
   getTodoById(id: string): Observable<TodoClass | undefined>{ 
     //  risutlato potrebbe essere todoclass o undefinde
