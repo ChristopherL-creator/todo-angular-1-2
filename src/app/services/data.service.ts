@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, pipe } from 'rxjs';
+import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
 import { TodoClass } from '../model/todo-class';
 import { TODOS } from '../model/todos-mock';
 import { ApiService } from './api.service';
@@ -63,20 +64,22 @@ export class DataService {
     );
   } 
 
-  refreshTodos(){ // forzo refresh di behavioursubj
+  completeTodo(todo: TodoClass): Observable<TodoClass>{ // forzo refresh di behavioursubj 
     //  creo nuovo array, da quello vecchio, e flielo do in pasto come nuovo vlore, per avvisre subject che è cambiato
     const newArray = [...this.todos.value]; 
     // in subject significa prendere ultimo valore dato 
     this.todos.next(newArray); 
     // next forza cambiamento subject
-  } 
+    return this.apiServ.putTodo(todo)
+  }  
 
-  removeTodo(todo: TodoClass): void{  
-    //  uso value per prendere array todos con valori più recenti
+  removeTodo(todo: TodoClass): Observable<TodoClass>{  
+    //  uso value per prendere array todos con valori più recenti; creo nuovo array in cui filtro via tutti todos diversi 
+    //  da quello selezionato, in modo che mi rimnanga solo quello 
     const newArray = this.todos.value.filter(t => t !== todo);
     this.todos.next(newArray); 
-        // next forza cambiamento subject
-
+        // next forza cambiamento subject 
+    return this.apiServ.deleteTodo(todo.id!); 
   } 
 
   getTodoById(id: string): Observable<TodoClass | undefined>{ 

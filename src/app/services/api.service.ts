@@ -1,12 +1,14 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { TodoClass } from '../model/todo-class';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
+export class ApiService { 
+
+  private readonly BASE_URL = 'https://628b2f687886bbbb37b2139d.mockapi.io/todos';
 
   constructor(private http: HttpClient) { 
     //  importo httpclient; 
@@ -14,13 +16,34 @@ export class ApiService {
 //  chimata server, possiamo fare pipe, che ci permete di infilre elaborazioni del dato generico in arrivo da mock api, 
 //  da dbobjects, a todoclass
   getTodosFromDb(){ 
-    const url = 'https://628b2f687886bbbb37b2139d.mockapi.io/todos'; 
-    return this.http.get<TodoClass[]>(url).pipe( 
+    return this.http.get<TodoClass[]>(this.BASE_URL).pipe( 
       // stabilisco che il tipo sia comunque TodoClass
       map(dbObjects => this.convertToTodosClass(dbObjects))
       ); 
     //  map di observable 
   } 
+
+  deleteTodo(id: string): Observable<any>{ 
+    
+    const url = this.BASE_URL + '/' + id; 
+
+    return this.http.delete<any>(url);
+
+  } 
+  
+  putTodo(todo: TodoClass): Observable<TodoClass>{  
+    const url = this.BASE_URL + '/' + todo.id; 
+    const httpOptions = { 
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json'
+      })
+    } 
+    return this.http.put<TodoClass>(url, TodoClass.toDbObj(todo), httpOptions)
+  } 
+
+  postTodo(todo: TodoClass): void{ 
+
+  }
 
   convertToTodosClass(dbObjectArray: any[]){ 
     const todoArray = []; 

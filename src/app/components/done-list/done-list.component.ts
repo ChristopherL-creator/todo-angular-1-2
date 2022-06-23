@@ -34,7 +34,10 @@ export class DoneListComponent implements OnInit {
     // mi arriva todo che era stato lanciato
     console.log('list-component', todo.name);
 //  dobbiamo avvisrre behavior subj che è cambiato  
-  this.dataServ.removeTodo(todo);
+  this.dataServ.removeTodo(todo).subscribe({ 
+    next: res => console.log('balle', res), 
+    error: err => console.log(err)
+    });
     
   }
 

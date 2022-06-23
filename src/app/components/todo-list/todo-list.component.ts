@@ -47,18 +47,20 @@ export class TodoListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
-  manageTodoEmission(todo: TodoClass){
+  manageTodoCompleted(todo: TodoClass): void{
     // mi arriva todo che era stato lanciato
     console.log('list-component', todo.name); 
-    this.dataServ.refreshTodos();
-
+    this.dataServ.completeTodo(todo).subscribe({ 
+      next: res => console.log('bella', res), 
+      error: err => console.log(err)
+    });
   }
 
   orderByName(){
     // this.todos.sort(function(a: TodoClass, b: TodoClass) {
-    //   // if (a.name < b.name) {
-    //   //   return -1;
-    //   // }
+      // if (a.name < b.name) {
+      //   return -1;
+      // }
 
     //   // if (a.name > b.name) {
     //   //   return 1;
